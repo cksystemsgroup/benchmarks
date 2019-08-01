@@ -1,5 +1,5 @@
 /*
-  The C* port of count_by_nondet-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of phases_2-2.c from github.com/sosy-lab/sv-benchmarks
   done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
@@ -20,18 +20,21 @@ void VERIFIER_assert(uint64_t cond) {
 }
 
 uint64_t main() {
-  uint64_t n;
   uint64_t x;
   uint64_t y;
 
-  n = input(0, 2000, 1); // input(0, -1, 1);
-  x = n;
-  y = 0;
+  x = 2;
+  y = input(0, 4000, 1); // input(0, -1, 1);
 
-  while (x > 0) {
-    x = x - 1;
-    y = y + 1;
+  if (y <= 2) return 0;
+
+  while (x < y) {
+    if (x < y / x) {
+      x = x * x;
+    } else {
+      x = x + 1;
+    }
   }
 
-  VERIFIER_assert(y != n);
+  VERIFIER_assert(x == y);
 }
