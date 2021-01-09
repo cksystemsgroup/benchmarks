@@ -1,6 +1,5 @@
 /*
   The C* port of count_by_nondet.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -30,7 +29,7 @@ uint64_t main() {
   k = 0;
 
   while(i < LARGE_INT) {
-    j = input(0, -1, 1);
+    interval(&j, 0, -1, 1);
     if (1 > j) {
       return 0;
     } else if (j >= LARGE_INT) {

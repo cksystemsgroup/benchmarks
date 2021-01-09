@@ -1,6 +1,5 @@
 /*
   The C* port of id2_b5_o10.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -50,7 +49,7 @@ uint64_t main() {
   uint64_t input;
   uint64_t result;
 
-  input  = input(0, 2500, 1); // input(0, -1, 1);
+  interval(&input, 0, 2500, 1); // interval(&input, 0, -1, 1);
   result = id(input);
 
   if (result == 10) {

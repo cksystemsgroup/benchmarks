@@ -1,10 +1,9 @@
 /*
   The C* port of phases_2-2.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
-  termination : true
-  unreach-call: false
+  termination : false
+  unreach-call: true
 */
 
 void VERIFIER_error() {
@@ -24,7 +23,7 @@ uint64_t main() {
   uint64_t y;
 
   x = 2;
-  y = input(0, 4000, 1); // input(0, -1, 1);
+  interval(&y, 0, -1, 1);
 
   if (y <= 0) return 0;
 

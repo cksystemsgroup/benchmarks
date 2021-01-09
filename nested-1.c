@@ -1,6 +1,5 @@
 /*
   The C* port of nested-1.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -28,8 +27,8 @@ uint64_t main() {
   uint64_t i;
   uint64_t j;
 
-  n = input(0, -1, 1);
-  m = input(0, -1, 1);
+  interval(&n, 0, -1, 1);
+  interval(&m, 0, -1, 1);
   k = 0;
 
   if (10 > n)

@@ -1,8 +1,3 @@
-/*
-  This file is a C* translation of the original implementation
-  done by Alireza Abyaneh.
-*/
-
 uint64_t FNM_NOMATCH =	1;
 uint64_t EOS = 0;
 
@@ -187,7 +182,7 @@ uint64_t main() {
   str = malloc(cnt * 8);
   i = 0;
   while (i < cnt-1) {
-    *(str + i) = input(33, 125, 1);
+    interval((str + i), 33, 125, 1);
     i = i + 1;
   }
   *(str + cnt-1) = 0;

@@ -1,10 +1,9 @@
 /*
   The C* port of invert_string-3.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
-  unreach-call: true
+  unreach-call: false
 */
 
 void VERIFIER_error() {
@@ -35,7 +34,7 @@ uint64_t main() {
 
   i = 0;
   while (i < MAX) {
-    *(str1 + i) = input(0, MAX-i, 1);
+    interval(str1 + i, 0, MAX-i, 1);
     i = i + 1;
   }
   *(str1 + (MAX-1)) = 0;

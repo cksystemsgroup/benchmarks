@@ -1,6 +1,5 @@
 /*
   The C* port of fibo_2calls_25-2.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -54,7 +53,7 @@ uint64_t main() {
   uint64_t x;
   uint64_t result;
 
-  x = input(0, 25, 1);
+  interval(&x, 0, 25, 1);
   result = fibo1(x);
 
   if (x < 15) {

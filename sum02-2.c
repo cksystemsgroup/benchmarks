@@ -1,6 +1,5 @@
 /*
   The C* port of sum02-2.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -21,7 +20,7 @@ uint64_t main() {
 
   sn = 0;
 
-  n = input(0, 10000, 1);
+  interval(&n, 0, 10000, 1);
 
   i = 0;
   while (i <= n) {

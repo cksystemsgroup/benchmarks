@@ -1,6 +1,5 @@
 /*
   The C* port of array_3-2.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -30,7 +29,7 @@ uint64_t main() {
 
   i = 0;
   while (i < N) {
-    *(A + i) = input(0, -1, 1);
+    interval(A + i, 0, -1, 1);
     i = i + 1;
   }
 

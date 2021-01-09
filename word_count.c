@@ -1,8 +1,3 @@
-/*
-  This file is a C* implementation of word count
-  written by Alireza Abyaneh.
-*/
-
 uint64_t CHAR_EOF          =  -1;
 uint64_t CHAR_TAB          =   9;
 uint64_t CHAR_LF           =  10;
@@ -33,7 +28,7 @@ uint64_t is_character_whitespace(uint64_t c) {
 
 void wc(uint64_t* s) {
   while (*s != CHAR_EOF) {
-    while (is_character_whitespace(*s)) {
+    while (is_character_whitespace(*s) == 1) {
       if (*s == CHAR_LF) {
         line_number = line_number + 1;
       }
@@ -65,11 +60,11 @@ uint64_t main() {
   uint64_t  cnt;
   uint64_t  i;
 
-  cnt = 9;
+  cnt = 8;
   str = malloc(cnt * 8);
   i = 0;
   while (i < cnt-1) {
-    *(str + i) = input(5, 125, 1);
+    interval((str + i), 5, 125, 1);
     i = i + 1;
   }
   *(str + cnt-1) = -1;

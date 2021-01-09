@@ -1,6 +1,5 @@
 /*
   The C* port of fibo_2calls_25-2.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true

@@ -1,6 +1,5 @@
 /*
   The C* port of recHanoi03-1.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -182,7 +181,7 @@ uint64_t main() {
 
   init_library();
 
-  n = input(0, 63, 1);
+  interval(&n, 0, 63, 1);
 
   if (n < 1)
   	return 0;
@@ -197,7 +196,4 @@ uint64_t main() {
   } else {
     VERIFIER_error();
   }
-
 }
-
-

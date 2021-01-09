@@ -1,6 +1,5 @@
 /*
   The C* port of id_o1000.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -28,7 +27,7 @@ uint64_t main() {
   uint64_t input;
   uint64_t result;
 
-  input = input(0, -1, 1);
+  interval(&input, 0, -1, 1);
   result = id(input);
 
   if (result == 1000) {

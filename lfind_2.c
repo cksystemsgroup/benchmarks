@@ -1,8 +1,3 @@
-/*
-  This file is a C* translation of the original implementation
-  done by Alireza Abyaneh.
-*/
-
 uint64_t compar(uint64_t* op1, uint64_t* op2) {
   return (*op1 == *op2);
 }
@@ -16,7 +11,7 @@ uint64_t* lfind(uint64_t* key, uint64_t* base, uint64_t* nmemb, uint64_t size) {
   cnt    = 0;
 
   loop = 1;
-  while (loop) {
+  while (loop > 0) {
     if (cnt < *nmemb) {
       if (compar(key, result) == 0) {
         result = result + size;
@@ -42,8 +37,8 @@ uint64_t main() {
   uint64_t  cnt;
   uint64_t  step;
 
-  cnt  = 2000;
-  step = 2;
+  cnt  = 1000;
+  step = 1;
 
   arr = malloc(cnt * 8);
   i = 0;
@@ -52,8 +47,10 @@ uint64_t main() {
     i = i + 1;
   }
 
+  interval(arr, 0, (cnt+1)*2, 1);
+
   element  = malloc(1 * 8);
-  *element = input(0, (cnt+1)*step, 1);
+  interval(element, 0, (cnt+1)*2, 1);
 
   length   = malloc(1 * 8);
   *length  = cnt;

@@ -1,6 +1,5 @@
 /*
   The C* port of half.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -59,7 +58,7 @@ uint64_t main() {
   INT64_MIN = INT64_MAX + 1;
 
   n = 0;
-  k = input(0, -1, 1);
+  interval(&k, 0, -1, 1);
 
   if (k > LARGE_INT) {
     return 0;

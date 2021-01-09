@@ -1,8 +1,3 @@
-/*
-  This file is a C* translation of the original implementation
-  done by Alireza Abyaneh.
-*/
-
 uint64_t* dot;
 
 uint64_t* strchr(uint64_t* s, uint64_t c) {
@@ -52,7 +47,7 @@ uint64_t* dirname(uint64_t* path) {
 
         runp = last_slash;
         loop = 1;
-        while (loop) {
+        while (loop > 0) {
           if (runp != path) {
             if (*(runp - 1) != '/')
               loop = 0;
@@ -63,7 +58,7 @@ uint64_t* dirname(uint64_t* path) {
         }
 
         loop = 1;
-        while (loop) {
+        while (loop > 0) {
           if (runp != path) {
             runp = runp - 1;
             if (*runp == '/') {
@@ -75,6 +70,7 @@ uint64_t* dirname(uint64_t* path) {
             loop = 0;
           }
         }
+
       }
     }
   }
@@ -82,7 +78,7 @@ uint64_t* dirname(uint64_t* path) {
   if (last_slash != (uint64_t*) 0) {
     runp = last_slash;
     loop = 1;
-    while (loop) {
+    while (loop > 0) {
       if (runp != path) {
         if (*(runp - 1) != '/')
           loop = 0;
@@ -114,11 +110,11 @@ uint64_t main() {
   uint64_t  cnt;
   uint64_t  i;
 
-  cnt = 17;
+  cnt = 16;
   str = malloc(cnt * 8);
   i = 0;
   while (i < cnt-1) {
-    *(str + i) = input(0, 125, 1);
+    interval(str + i, 0, 255, 1);
     i = i + 1;
   }
   *(str + cnt - 1) = 0;

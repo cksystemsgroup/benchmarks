@@ -1,6 +1,5 @@
 /*
   The C* port of sum_non_eq-3.c from github.com/sosy-lab/sv-benchmarks
-  done by Alireza Abyaneh
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
   termination : true
@@ -26,8 +25,8 @@ uint64_t main() {
   uint64_t b;
   uint64_t result;
 
-  a = input(0, -1, 1);
-  b = input(0, -1, 1);
+  interval(&a, 0, -1, 1);
+  interval(&b, 0, -1, 1);
   result = sum(a, b);
 
   if (result == a + b) {

@@ -1,8 +1,3 @@
-/*
-  This file is a C* translation of the original implementation
-  done by Alireza Abyaneh.
-*/
-
 uint64_t FNM_NOMATCH =	1;
 uint64_t EOS = 0;
 
@@ -162,7 +157,7 @@ uint64_t main() {
   uint64_t  cnt;
   uint64_t  i;
 
-  pattern_str = malloc(20 * 8);
+  pattern_str = malloc(17 * 8);
   *(pattern_str + 0)  = '[';
   *(pattern_str + 1)  = 'a';
   *(pattern_str + 2)  = '-';
@@ -176,19 +171,16 @@ uint64_t main() {
   *(pattern_str + 10) = '9';
   *(pattern_str + 11) = ']';
   *(pattern_str + 12) = '.';
-  *(pattern_str + 13) = 't';
-  *(pattern_str + 14) = 'a';
-  *(pattern_str + 15) = 'r';
-  *(pattern_str + 16) = '.';
-  *(pattern_str + 17) = 'g';
-  *(pattern_str + 18) = 'z';
-  *(pattern_str + 19) = 0;
+  *(pattern_str + 13) = 'z';
+  *(pattern_str + 14) = 'i';
+  *(pattern_str + 15) = 'p';
+  *(pattern_str + 16) = 0;
 
   cnt = 14;
   str = malloc(cnt * 8);
   i = 0;
   while (i < cnt-1) {
-    *(str + i) = input(33, 125, 1);
+    interval((str + i), 33, 125, 1);
     i = i + 1;
   }
   *(str + cnt-1) = 0;
