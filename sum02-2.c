@@ -12,23 +12,24 @@ void VERIFIER_error() {
 }
 
 uint64_t main() {
-  uint64_t i;
-  uint64_t n;
-  uint64_t sn;
-  uint64_t nl;
-  uint64_t gauss;
+  uint64_t  i;
+  uint64_t* n;
+  uint64_t  sn;
+  uint64_t  nl;
+  uint64_t  gauss;
 
+  n = malloc(8);
   sn = 0;
 
-  interval(&n, 0, 10000, 1);
+  read(0, n, 8);
 
   i = 0;
-  while (i <= n) {
+  while (i <= *n) {
     sn = sn + i;
     i = i + 1;
   }
 
-  nl = n;
+  nl = *n;
   gauss = (nl*(nl+1))/2;
 
   if (sn != gauss) {

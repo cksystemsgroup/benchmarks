@@ -14,20 +14,22 @@ void VERIFIER_error() {
 uint64_t a = 2;
 
 uint64_t main() {
-  uint64_t i;
-  uint64_t n;
-  uint64_t sn;
+  uint64_t  i;
+  uint64_t* n;
+  uint64_t  sn;
 
-  interval(&n, 0, -1, 1);
+  n = malloc(8);
+
+  read(0, n, 8);
   sn = 0;
   i = 1;
-  while (i <= n) {
+  while (i <= *n) {
     if (i < 10)
       sn = sn + a;
     i = i + 1;
   }
 
-  if (sn == n*a)
+  if (sn == (*n)*a)
     return 0;
   else if (sn == 0)
     return 0;

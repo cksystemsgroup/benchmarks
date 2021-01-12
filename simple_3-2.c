@@ -19,13 +19,15 @@ void VERIFIER_assert(uint64_t cond) {
 }
 
 uint64_t main() {
-  uint64_t x;
-  uint64_t N;
+  uint64_t  x;
+  uint64_t* N;
+
+  N = malloc(8);
 
   x = 0;
-  interval(&N, 0, 65535, 1);
+  read(0, N, 8);
 
-  while (x < N) {
+  while (x < *N) {
     x = x + 2;
   }
 
