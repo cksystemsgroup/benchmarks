@@ -19,11 +19,14 @@ void VERIFIER_assert(uint64_t cond) {
 }
 
 uint64_t main() {
-  uint64_t n;
+  uint64_t *n;
   uint64_t x;
   uint64_t y;
 
-  interval(&n, 0, 2000, 1); // interval(&n, 0, -1, 1);
+  n = malloc(8);
+
+  read(0, n, 8); 
+
   x = n;
   y = 0;
 
@@ -32,5 +35,5 @@ uint64_t main() {
     y = y + 1;
   }
 
-  VERIFIER_assert(y == n);
+  VERIFIER_assert(y == *n);
 }

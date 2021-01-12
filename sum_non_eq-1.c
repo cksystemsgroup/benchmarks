@@ -20,15 +20,16 @@ uint64_t sum(uint64_t n, uint64_t m) {
 }
 
 uint64_t main() {
-  uint64_t a;
-  uint64_t b;
+  uint64_t *a;
+  uint64_t *b;
   uint64_t result;
 
-  interval(&a, 0, -1, 1);
-  interval(&b, 0, -1, 1);
-  result = sum(a, b);
+  read(0, a, 8);
+  read(0, b, 8);
 
-  if (result != a + b) {
+  result = sum(*a, *b);
+
+  if (result != *a + *b) {
     VERIFIER_error();
   }
 
