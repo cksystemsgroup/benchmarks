@@ -10,5 +10,5 @@ all: $(SV_BINARIES)
 clean:
 	rm -f $(SV_BINARIES)
 
-%.m: %.c
-	$(SELFIE) -c $< -o $@
+%.m: %.c cstar-lib.c
+	$(SELFIE) -c cstar-lib.c $< -o $@

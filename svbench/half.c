@@ -13,36 +13,6 @@
   unreach-call: true
 */
 
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-void VERIFIER_assert(uint64_t cond) {
-  if (cond == 0) {
-    VERIFIER_error();
-  }
-  return;
-}
-
-uint64_t SIZEOFINT32 = 4;
-uint64_t INT32_MIN = 2147483648; // 1 << 31
-
-uint64_t VERIFIER_nondet_int() {
-  uint64_t *x;
-  x = malloc(8);
-  *x = 0;  // touch memory
-  read(0, x, SIZEOFINT32);
-  *x = *x - INT32_MIN;
-  return *x;
-}
-
-uint64_t INT64_MIN = 9223372036854775808; // 1 << 63
-
-uint64_t VERIFIER_slt(uint64_t a, uint64_t b) {
-  return a + INT64_MIN < b + INT64_MIN;
-}
-
 uint64_t LARGE_INT = 2000;
 
 uint64_t main() {

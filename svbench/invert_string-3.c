@@ -14,30 +14,6 @@
   unreach-call: true
 */
 
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-void VERIFIER_assert(uint64_t cond) {
-  if (cond == 0) {
-    VERIFIER_error();
-  }
-  return;
-}
-
-uint64_t SIZEOFUINT8 = 1;
-
-uint64_t VERIFIER_nondet_uchar() {
-  uint64_t *x;
-  x = malloc(8);
-  *x = 0;  // touch memory
-  read(0, x, SIZEOFUINT8);
-  return *x;
-}
-
-uint64_t SIZEOFUINT64 = 8;
-
 uint64_t main() {
   uint64_t  max;
   uint64_t* str1;

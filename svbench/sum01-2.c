@@ -5,24 +5,12 @@
   Original: sv-benchmarks/c/loops/sum01-2.c
   Data Model: ILP32
 
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
+
   termination : true
   unreach-call: true
 */
-
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-uint64_t SIZEOFINT32 = 4;
-
-uint64_t VERIFIER_nondet_int() {
-  uint64_t *x;
-  x = malloc(8);
-  *x = 0;  // touch memory
-  read(0, x, SIZEOFINT32);
-  return *x;
-}
 
 uint64_t a = 2;
 
@@ -31,7 +19,7 @@ uint64_t main() {
   uint64_t n;
   uint64_t sn;
 
-  n = VERIFIER_nondet_int();
+  n = VERIFIER_nondet_uint();
   sn = 0;
 
   if (n >= 1000)

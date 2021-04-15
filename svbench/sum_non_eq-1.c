@@ -9,21 +9,6 @@
   no-overflow : false
 */
 
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-uint64_t SIZEOFINT32 = 4;
-
-uint64_t VERIFIER_nondet_int() {
-  uint64_t *x;
-  x = malloc(8);
-  *x = 0;  // touch memory
-  read(0, x, SIZEOFINT32);
-  return *x;
-}
-
 uint64_t sum(uint64_t n, uint64_t m) {
   if (n == 0) {
     return m;

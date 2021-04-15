@@ -9,25 +9,6 @@
   unreach-call: true
 */
 
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-void VERIFIER_assert(uint64_t cond) {
-  if (cond == 0) {
-    VERIFIER_error();
-  }
-  return;
-}
-
-uint64_t VERIFIER_nondet_uint() {
-  uint64_t *x;
-  x = malloc(8);
-  read(0, x, 8);
-  return *x;
-}
-
 uint64_t main() {
   uint64_t n;
   uint64_t x;

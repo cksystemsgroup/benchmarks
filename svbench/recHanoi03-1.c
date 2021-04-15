@@ -14,30 +14,6 @@
   unreach-call: true
 */
 
-void VERIFIER_error() {
-  uint64_t x;
-  x = 10 / 0;
-}
-
-uint64_t SIZEOFUINT32 = 4;
-
-uint64_t VERIFIER_nondet_uint() {
-  uint64_t *x;
-  x = malloc(8);
-  *x = 0;  // touch memory
-  read(0, x, SIZEOFUINT32);
-  return *x;
-}
-
-uint64_t VERIFIER_two_pow_n(uint64_t n) {
-  if (n == 0)
-    return 1;
-  else if (n < 64)
-    return 2 * VERIFIER_two_pow_n(n - 1);
-  else
-    return 0;
-}
-
 /*
  * This function returns the optimal amount of steps,
  * needed to solve the problem for n-disks
@@ -49,7 +25,6 @@ uint64_t hanoi(uint64_t n) {
 
   return 2 * (hanoi(n-1)) + 1;
 }
-
 
 uint64_t main() {
   uint64_t n;
