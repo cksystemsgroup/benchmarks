@@ -1,5 +1,4 @@
-uint64_t* power_of_two_table;
-uint64_t  INT64_MIN_T;
+uint64_t INT64_MIN_T;
 
 uint64_t signed_less_than(uint64_t a, uint64_t b) {
   return a + INT64_MIN_T < b + INT64_MIN_T;
@@ -46,32 +45,12 @@ void quick_sort(uint64_t* arr, uint64_t low, uint64_t high) {
   }
 }
 
-void init() {
-  uint64_t i;
-
-  power_of_two_table = malloc(64 * 8);
-
-  *power_of_two_table = 1;
-
-  i = 1;
-
-  while (i < 64) {
-    *(power_of_two_table + i) = *(power_of_two_table + (i - 1)) * 2;
-
-    i = i + 1;
-  }
-}
-
-uint64_t two_to_the_power_of(uint64_t p) {
-  return *(power_of_two_table + p);
-}
-
 uint64_t main(uint64_t argc, uint64_t* argv) {
   uint64_t v1;
   uint64_t cnt;
   uint64_t* arr;
 
-  INT64_MIN_T = 9223372036854775808;
+  INT64_MIN_T = 9223372036854775808; // 1 << 63;
 
   cnt = 16;
   arr = malloc(cnt * 8);
