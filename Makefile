@@ -1,6 +1,6 @@
 SELFIE := $(shell which selfie)
 
-SV_SOURCES := $(shell grep -l 'sv-benchmarks' *.c | sort)
+SV_SOURCES := $(sort $(wildcard svbench/*.c))
 SV_BINARIES := $(patsubst %.c,%.m,$(SV_SOURCES))
 
 .PHONY: all clean
