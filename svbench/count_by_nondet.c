@@ -24,7 +24,7 @@ uint64_t main() {
   k = 0;
 
   while(i < LARGE_INT) {
-    j = VERIFIER_nondet_uint()
+    j = VERIFIER_nondet_uint();
     if (1 > j) {
       return 0;
     } else if (j >= LARGE_INT) {

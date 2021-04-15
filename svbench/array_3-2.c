@@ -19,7 +19,7 @@ uint64_t main() {
 
   i = 0;
   while (i < N) {
-    interval(A + i, 0, -1, 1);
+    *(A + i) = VERIFIER_nondet_int();
     i = i + 1;
   }
 

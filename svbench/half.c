@@ -23,7 +23,7 @@ uint64_t main() {
   n = 0;
   k = VERIFIER_nondet_int();
 
-  if (VERIFIER_slt(LARGE_INT, k) {
+  if (VERIFIER_slt(LARGE_INT, k)) {
     return 0;
   } else if (VERIFIER_slt(k, -LARGE_INT)) {
     return 0;
