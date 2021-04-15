@@ -1,6 +1,9 @@
 /*
-  The C* port of simple_3-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/loop-acceleration/simple_3-2.c
+  Data Model: ILP32
 
   termination : true
   unreach-call: true
@@ -18,16 +21,24 @@ void VERIFIER_assert(uint64_t cond) {
   return;
 }
 
-uint64_t main() {
-  uint64_t  x;
-  uint64_t* N;
+uint64_t SIZEOFUINT16 = 2;
 
-  N = malloc(8);
+uint64_t VERIFIER_nondet_ushort() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT16);
+  return *x;
+}
+
+uint64_t main() {
+  uint64_t x;
+  uint64_t N;
 
   x = 0;
-  read(0, N, 8);
+  N = VERIFIER_nondet_ushort();
 
-  while (x < *N) {
+  while (x < N) {
     x = x + 2;
   }
 

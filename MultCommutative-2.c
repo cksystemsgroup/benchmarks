@@ -1,6 +1,12 @@
 /*
-  The C* port of MultCommutative-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive/MultCommutative-2.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
 
   termination : true
   unreach-call: true
@@ -11,7 +17,17 @@ void VERIFIER_error() {
   x = 10 / 0;
 }
 
-// multiplies two integers n and m
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
+// Multiplies two integers n and m
 uint64_t mult(uint64_t n, uint64_t m) {
   if (m < 0) {
     return mult(n, -m);
@@ -30,13 +46,13 @@ uint64_t main() {
   uint64_t res1;
   uint64_t res2;
 
-  interval(&m, 0, -1, 1);
+  m = VERIFIER_nondet_uint();
   if (m < 0)
     return 0;
   else if (m > 46340)
     return 0;
 
-  interval(&n, 0, -1, 1);
+  n = VERIFIER_nondet_uint();
   if (n < 0)
     return 0;
   else if (n > 46340)

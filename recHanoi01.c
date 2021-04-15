@@ -1,6 +1,12 @@
 /*
-  The C* port of recHanoi01.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive/recHanoi01.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
 
   termination : true
   unreach-call: true
@@ -18,6 +24,16 @@ void VERIFIER_assert(uint64_t cond) {
   return;
 }
 
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
 uint64_t counter;
 
 /*
@@ -25,9 +41,9 @@ uint64_t counter;
  * needed to solve the problem for n-disks
  */
 uint64_t hanoi(uint64_t n) {
-	if (n == 1) {
-		return 1;
-	}
+  if (n == 1) {
+    return 1;
+  }
 
   return 2 * (hanoi(n-1)) + 1;
 }
@@ -37,22 +53,22 @@ uint64_t hanoi(uint64_t n) {
  * But the amount of steps is counted in a global variable.
  */
 void applyHanoi(uint64_t n, uint64_t from, uint64_t to, uint64_t via) {
-	if (n == 0) {
-		return;
-	}
+  if (n == 0) {
+    return;
+  }
 
-	// increment the number of steps
-	counter = counter + 1;
+  // increment the number of steps
+  counter = counter + 1;
 
   applyHanoi(n-1, from, via, to);
-	applyHanoi(n-1, via, to, from);
+  applyHanoi(n-1, via, to, from);
 }
 
 uint64_t main() {
   uint64_t n;
   uint64_t result;
 
-  interval(&n, 0, -1, 1);
+  n = VERIFIER_nondet_uint();
   if (n < 1)
     return 0;
   else if (n > 31)

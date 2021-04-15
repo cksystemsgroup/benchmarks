@@ -1,6 +1,14 @@
 /*
-  The C* port of Fibonacci05.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive/Fibonacci05.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
+  - Different values in condition, original was `x < 8 || result >= 34`
+  - Early return for random values `x > 25` added
 
   termination : true
   unreach-call: false
@@ -9,6 +17,16 @@
 void VERIFIER_error() {
   uint64_t x;
   x = 10 / 0;
+}
+
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
 }
 
 uint64_t fibonacci(uint64_t n) {
@@ -33,7 +51,7 @@ uint64_t main() {
   uint64_t x;
   uint64_t result;
 
-  interval(&x, 0, -1, 1);
+  x = VERIFIER_nondet_uint();
 
   if (x > 25)
     return 0;

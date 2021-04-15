@@ -1,6 +1,9 @@
 /*
-  The C* port of count_by_nondet-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/loops/count_up_down-2.c
+  Data Model: ILP32
 
   termination : true
   unreach-call: false
@@ -18,12 +21,22 @@ void VERIFIER_assert(uint64_t cond) {
   return;
 }
 
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
 uint64_t main() {
   uint64_t n;
   uint64_t x;
   uint64_t y;
 
-  interval(&n, 0, 2000, 1); // interval(&n, 0, -1, 1);
+  n = VERIFIER_nondet_uint();
   x = n;
   y = 0;
 

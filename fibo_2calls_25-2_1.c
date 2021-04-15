@@ -1,6 +1,13 @@
 /*
-  The C* port of fibo_2calls_25-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive-simple/fibo_2calls_25-2.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched to non-deterministic initialization of `x` with `x <= 25`
+  - Switched to different check `x < 15 || result > 610 || x == 15`
 
   termination : true
   unreach-call: true
@@ -16,6 +23,16 @@ void VERIFIER_assert(uint64_t cond) {
     VERIFIER_error();
   }
   return;
+}
+
+uint64_t SIZEOFUINT8 = 1;
+
+uint64_t VERIFIER_nondet_uchar() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT8);
+  return *x;
 }
 
 uint64_t fibo1(uint64_t n);
@@ -53,7 +70,7 @@ uint64_t main() {
   uint64_t x;
   uint64_t result;
 
-  interval(&x, 0, 25, 1);
+  x = VERIFIER_nondet_uchar() % 26;
   result = fibo1(x);
 
   if (x < 15) {

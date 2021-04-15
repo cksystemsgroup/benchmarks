@@ -1,6 +1,12 @@
 /*
-  The C* port of EvenOdd01-1.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive/EvenOdd01-1.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
 
   no-overflow : true
   termination : true
@@ -17,6 +23,16 @@ void VERIFIER_assert(uint64_t cond) {
     VERIFIER_error();
   }
   return;
+}
+
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
 }
 
 uint64_t is_odd(uint64_t n);
@@ -47,14 +63,14 @@ uint64_t main() {
   uint64_t result;
   uint64_t mod;
 
-  interval(&n, 0, 2000, 1); // interval(&n, 0, -1, 1);
+  n = VERIFIER_nondet_uint();
 
   if (n < 0) {
     return 0;
   }
 
   result = is_odd(n);
-  mod    = n % 2;
+  mod = n % 2;
 
   VERIFIER_assert(result == mod);
 }

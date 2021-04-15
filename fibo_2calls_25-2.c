@@ -1,6 +1,9 @@
 /*
-  The C* port of fibo_2calls_25-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive-simple/fibo_2calls_25-2.c
+  Data Model: ILP32
 
   termination : true
   unreach-call: true

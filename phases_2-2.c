@@ -1,9 +1,15 @@
 /*
-  The C* port of phases_2-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
 
-  termination : false
-  unreach-call: true
+  Original: sv-benchmarks/c/loop-acceleration/phases_2-2.c
+  Data Model: ILP32
+
+  Modifications:
+  - Changed `x = 1` to `x = 2` during initialization
+
+  termination : false  // TODO: true now?
+  unreach-call: true   // TODO: false now?
 */
 
 void VERIFIER_error() {
@@ -18,12 +24,22 @@ void VERIFIER_assert(uint64_t cond) {
   return;
 }
 
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
 uint64_t main() {
   uint64_t x;
   uint64_t y;
 
   x = 2;
-  interval(&y, 0, -1, 1);
+  y = VERIFIER_nondet_uint();
 
   if (y <= 0) return 0;
 

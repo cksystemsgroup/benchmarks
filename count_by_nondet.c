@@ -1,6 +1,13 @@
 /*
-  The C* port of count_by_nondet.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/loop-new/count_by_nondet.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
+  - Defined `LARGE_INT` to be constant 2000
 
   termination : true
   unreach-call: true
@@ -18,6 +25,16 @@ void VERIFIER_assert(uint64_t cond) {
   return;
 }
 
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
 uint64_t LARGE_INT = 2000;
 
 uint64_t main() {
@@ -29,7 +46,7 @@ uint64_t main() {
   k = 0;
 
   while(i < LARGE_INT) {
-    interval(&j, 0, -1, 1);
+    j = VERIFIER_nondet_uint()
     if (1 > j) {
       return 0;
     } else if (j >= LARGE_INT) {

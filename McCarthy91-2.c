@@ -1,6 +1,12 @@
 /*
-  The C* port of McCarthy91-2.c from github.com/sosy-lab/sv-benchmarks
+  The C* port of a benchmark from github.com/sosy-lab/sv-benchmarks
   for any information about the LICENCE see github.com/sosy-lab/sv-benchmarks
+
+  Original: sv-benchmarks/c/recursive/McCarthy91-2.c
+  Data Model: ILP32
+
+  Modifications:
+  - Switched from `int` to `uint` without loss of generality
 
   termination : true
   unreach-call: true
@@ -11,6 +17,16 @@ void VERIFIER_error() {
   x = 10 / 0;
 }
 
+uint64_t SIZEOFUINT32 = 4;
+
+uint64_t VERIFIER_nondet_uint() {
+  uint64_t *x;
+  x = malloc(8);
+  *x = 0;  // touch memory
+  read(0, x, SIZEOFUINT32);
+  return *x;
+}
+
 uint64_t f91(uint64_t x) {
   if (x > 100)
     return x - 10;
@@ -18,12 +34,11 @@ uint64_t f91(uint64_t x) {
     return f91(f91(x+11));
 }
 
-
 uint64_t main() {
   uint64_t x;
   uint64_t result;
 
-  interval(&x, 0, -1, 1);
+  x = VERIFIER_nondet_uint();
   result = f91(x);
 
   if (result == 91) {
