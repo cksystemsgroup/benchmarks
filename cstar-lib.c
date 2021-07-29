@@ -21,7 +21,7 @@ uint64_t INT32_MIN = 2147483648; // 1 << 31
 uint64_t INT64_MIN = 9223372036854775808; // 1 << 63
 
 // Raises a verification error.
-void  VERIFIER_error() {
+void VERIFIER_error() {
   uint64_t x;
   x = 10 / 0;
 }
